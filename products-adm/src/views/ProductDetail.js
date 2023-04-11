@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
 function ProductDetail() {
     const { id } = useParams()
+    const navigate = useNavigate()
 
     const [title, setTitle] = useState('')
     const [price, setPrice] = useState('')
@@ -21,12 +22,17 @@ function ProductDetail() {
 
     }, [id])
 
+    function editar(id){
+        navigate("/" + id + "/edit")
+    }
+
     return (
         <section>
             <h3>Datos del producto</h3>
             <h3>Detalles de: {title}</h3>
             <h3>Precio: {price}</h3>
             <h3>Descripcion: {descrip}</h3>
+            <button onClick={() => editar(id)} >Editar</button>
         </section>
 
     );
